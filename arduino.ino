@@ -22,6 +22,7 @@ void loop() {
         analogWrite (A0, 60);
     } else if (emfangen == "STOP") {
         Serial.println("Stop");
+        analogWrite (A0, 0);
     }
   }
 }

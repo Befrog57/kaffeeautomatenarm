@@ -1,14 +1,15 @@
 #include <Servo.h>
 
 String empfangen;
-int dly=5;
+int dly=50;
 Servo myservo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
-boolean stop=true;
+boolean stop=false;
  
 void setup() {
-  myservo.attach(5);  // attaches the servo on pin 5 to the servo object
+  myservo.attach(2);  // attaches the servo on pin 5 to the servo object
   Serial.begin(9600);
+  myservo.write(200);
 }
  
 void loop() {
@@ -16,23 +17,23 @@ void loop() {
   {
     empfangen = Serial.readString();
     empfangen.trim();
-    stop=false;
+    //stop=false;
     if (empfangen == "schnell")
-      dly= 0;
+      dly = 10;
     else if (empfangen == "mittel")
-      dly= 10;
+      dly = 30;
     else if (empfangen == "langsam")
-      dly=20;
+      dly = 50;
     else if (empfangen == "STOP")
-      stop=true;
+      stop = true;
     Serial.println(empfangen);  
   }
-  else
-  {
-    dly=5;
+  
+  for (pos = 0; pos < 175 && stop==false; pos += 1) { // goes from 0 degrees to 360 degrees
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(dly);
   }
-  for (pos = 0; pos < 360 && stop==false; pos += 1) { // goes from 0 degrees to 360 degrees
-    // in steps of 1 degree
+    for (pos = 175; pos > 0 && stop==false; pos -= 1) { // goes from 0 degrees to 360 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(dly);
   }

@@ -5,13 +5,13 @@ int dly=50;
 Servo myservo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
 boolean stop=false;
- 
+
 void setup() {
   myservo.attach(2);  // attaches the servo on pin 5 to the servo object
   Serial.begin(9600);
   myservo.write(200);
 }
- 
+
 void loop() {
   if(Serial.available() > 0)
   {
@@ -26,9 +26,9 @@ void loop() {
       dly = 50;
     else if (empfangen == "STOP")
       stop = true;
-    Serial.println(empfangen);  
+    Serial.println(empfangen);
   }
-  
+
   for (pos = 0; pos < 175 && stop==false; pos += 1) { // goes from 0 degrees to 360 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(dly);

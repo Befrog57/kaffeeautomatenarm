@@ -17,7 +17,7 @@ void loop() {
   {
     empfangen = Serial.readString();
     empfangen.trim();
-    //stop=false;
+    stop=false;
     if (empfangen == "schnell")
       dly = 10;
     else if (empfangen == "mittel")
@@ -29,11 +29,11 @@ void loop() {
     Serial.println(empfangen);
   }
 
-  for (pos = 0; pos < 175 && stop==false; pos += 1) { // goes from 0 degrees to 360 degrees
+  for (pos = 0; pos < 155 && stop==false; pos += 1) { // goes from 0 degrees to 360 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(dly);
   }
-    for (pos = 175; pos > 0 && stop==false; pos -= 1) { // goes from 0 degrees to 360 degrees
+    for (pos = 155; pos > 0 && stop==false; pos -= 1) { // goes from 0 degrees to 360 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(dly);
   }

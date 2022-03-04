@@ -18,9 +18,7 @@ void loop() {
     empfangen = Serial.readString();
     empfangen.trim();
     stop=false;
-    if (empfangen == "schnell")
-      dly = 10;
-    else if (empfangen == "mittel")
+    else if (empfangen == "start")
       dly = 30;
     else if (empfangen == "langsam")
       dly = 50;

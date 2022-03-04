@@ -20,8 +20,6 @@ void loop() {
     stop=false;
     else if (empfangen == "start")
       dly = 30;
-    else if (empfangen == "langsam")
-      dly = 50;
     else if (empfangen == "STOP")
       stop = true;
     Serial.println(empfangen);

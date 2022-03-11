@@ -25,11 +25,11 @@ void starteWasser () {
     empfangen = Wire.read();
     empfangen.trim();
     //stop=false;
-    if (empfangen == "start") {
+    if (empfangen == true) {
       stop=false;
       dly = 30;
     }
-    else if (empfangen == "STOP")
+    else if (empfangen == false)
       stop = true;
     Serial.println(empfangen);
   }

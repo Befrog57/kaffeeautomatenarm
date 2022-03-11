@@ -1,4 +1,5 @@
 #include <Servo.h>
+#include <Wire.h>
 
 String empfangen;
 int dly=50;
@@ -7,19 +8,27 @@ int pos = 0;    // variable to store the servo position
 boolean stop=false;
 
 void setup() {
+  Wire.begin(4);
+  Wire.onReceive(starteWasser);
   myservo.attach(2);  // attaches the servo on pin 5 to the servo object
   Serial.begin(9600);
   myservo.write(200);
 }
 
 void loop() {
-  if(Serial.available() > 0)
+  delay(100);
+}
+
+void starteWasser () {
+  if(Wire.available() > 0)
   {
-    empfangen = Serial.readString();
+    empfangen = Wire.read();
     empfangen.trim();
-    stop=false;
-    else if (empfangen == "start")
+    //stop=false;
+    if (empfangen == "start") {
+      stop=false;
       dly = 30;
+    }
     else if (empfangen == "STOP")
       stop = true;
     Serial.println(empfangen);
